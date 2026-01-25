@@ -59,13 +59,10 @@ jobs:
           java-version: '17'
           cache: 'maven'
 
-      - name: Build (skip tests)
+      - name: Build and Test
         env:
           MAVEN_OPTS: -Xmx2g
-        run: ./mvnw -B -DskipTests=true clean package
-
-      - name: Run Tests
-        run: ./mvnw -B test
+        run: ./mvnw -B clean verify
 
       - name: SonarCloud Scan (use Sonar Maven plugin)
         if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
