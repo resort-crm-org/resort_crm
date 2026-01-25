@@ -75,7 +75,8 @@ jobs:
           echo "Running Sonar Maven scanner (explicit plugin coordinate)"
           ./mvnw -B org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar \
             -Dsonar.login=${{ env.SONAR_TOKEN }} \
-            -Dsonar.projectKey=resort_crm \
+            -Dsonar.projectKey=23suca03-dineshkarthick_resort_crm \
+
             -Dsonar.organization=23suca03-dineshkarthick \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.pullrequest.key=${{ github.event.pull_request.number }} \
