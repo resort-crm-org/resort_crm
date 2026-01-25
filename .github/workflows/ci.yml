@@ -3,7 +3,7 @@ name: CI
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    branches: [ 'main', 'master' ]
+    branches: ["main", "master"]
   workflow_dispatch:
 
 jobs:
@@ -56,8 +56,8 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: temurin
-          java-version: '17'
-          cache: 'maven'
+          java-version: "17"
+          cache: maven
 
       - name: Build and Test
         env:
@@ -73,7 +73,6 @@ jobs:
           ./mvnw -B org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.1.2184:sonar \
             -Dsonar.login=${{ env.SONAR_TOKEN }} \
             -Dsonar.projectKey=23suca03-dineshkarthick_resort_crm \
-
             -Dsonar.organization=23suca03-dineshkarthick \
             -Dsonar.host.url=https://sonarcloud.io \
             -Dsonar.pullrequest.key=${{ github.event.pull_request.number }} \
