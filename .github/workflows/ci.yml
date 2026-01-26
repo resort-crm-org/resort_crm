@@ -21,7 +21,10 @@ jobs:
           distribution: temurin
           cache: maven
       
-      - name: Build and analyze with SonarQube
+      - name: Build with Maven
+        run: ./mvnw -B clean verify
+      
+      - name: Analyze with SonarQube
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=23suca03-dineshkarthick_resort_crm
+        run: ./mvnw org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
