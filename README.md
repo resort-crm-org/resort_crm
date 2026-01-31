@@ -256,7 +256,9 @@ docker build -t resort-crm .
 docker run -p 8080:8080 resort-crm
 ```
 
-## Deployment
+## Optional Deployment (Experimental)
+
+> **Note**: Backend deployment to Render was explored as an optional enhancement and is not mandatory for core project evaluation.
 
 ### Production Deployment on Render
 
@@ -307,6 +309,14 @@ Production environment variables are configured in Render's dashboard:
 - Monitor application performance and resource usage
 - Set up alerts for downtime or errors
 
+## Known Limitations
+
+- Uses H2 in-memory database; data resets on application restart
+- No authentication or authorization implemented
+- Designed for single-resort usage
+- Not optimized for large-scale concurrent traffic
+- Room allotment system uses basic assignment logic
+
 ## Testing
 
 Run tests with:
@@ -329,7 +339,7 @@ The application includes centralized exception handling for:
 
 ## Code Quality
 
-This project uses SonarCloud for code quality analysis:
+This project integrates SonarCloud for static code analysis and code quality monitoring:
 - **Organization**: 23suca03-dineshkarthick
 - **Project Key**: 23suca03-dineshkarthick_resort_crm
 - **SonarCloud URL**: https://sonarcloud.io
