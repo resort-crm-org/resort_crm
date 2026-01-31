@@ -256,6 +256,120 @@ docker build -t resort-crm .
 docker run -p 8080:8080 resort-crm
 ```
 
+## Challenges Faced and Solutions
+
+During the development and DevOps integration of the Resort CRM backend, several challenges were encountered. These issues were resolved through systematic debugging and configuration adjustments.
+
+### 1. Maven Command Not Found
+
+**Issue**:  
+While building the project in certain environments (such as Docker Playground), the `mvn` command was not available.
+
+**Cause**:  
+Maven was not installed in the execution environment.
+
+**Solution**:  
+The Maven Wrapper (`mvnw`) provided by Spring Boot was used to build the project:
+```bash
+./mvnw clean package
+```
+
+On Windows, use:
+```bash
+mvnw.cmd clean package
+```
+
+The Maven Wrapper eliminates the need for a separate Maven installation and ensures consistent builds across all environments.
+
+### 2. Port Already in Use
+
+**Issue**:  
+Application startup failed with "Address already in use" error when attempting to start the application on port 8080.
+
+**Cause**:  
+Another application or a previous instance of the Resort CRM application was already running on port 8080.
+
+**Solution**:  
+Either kill the process using the port or configure a different port in `application.properties`:
+```properties
+server.port=8081
+```
+
+To identify and terminate the process using the port:
+```bash
+# On Windows
+netstat -ano | findstr :8080
+taskkill /PID <PID> /F
+
+# On Linux/Mac
+lsof -i :8080
+kill -9 <PID>
+```
+
+### 3. H2 Database Connection Issues
+
+**Issue**:  
+Application failed to connect to the H2 database with connection refused errors.
+
+**Cause**:  
+Incorrect or missing database URL configuration in `application.properties`.
+
+**Solution**:  
+Verify and update the H2 database configuration:
+```properties
+spring.datasource.url=jdbc:h2:mem:resortcrm;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+spring.datasource.username=sa
+spring.datasource.password=
+spring.h2.console.enabled=true
+spring.jpa.hibernate.ddl-auto=update
+```
+
+The in-memory database URL `jdbc:h2:mem:resortcrm` ensures the database persists during the application session.
+
+### 4. Docker Build Failures
+
+**Issue**:  
+Docker build failed with Java compilation errors or missing dependencies.
+
+**Cause**:  
+Incorrect Dockerfile configuration or missing dependencies in the build process.
+
+**Solution**:  
+Ensure the Dockerfile properly stages the Maven build and uses the correct Java base image:
+```dockerfile
+FROM maven:3.8-openjdk-17 AS build
+WORKDIR /app
+COPY . .
+RUN ./mvnw clean package
+
+FROM openjdk:17-jdk-slim
+COPY --from=build /app/target/*.jar app.jar
+ENTRYPOINT ["java", "-jar", "app.jar"]
+```
+
+### 5. CORS Issues in Frontend Integration
+
+**Issue**:  
+Frontend applications received CORS (Cross-Origin Resource Sharing) errors when attempting to communicate with the backend API.
+
+**Cause**:  
+Missing CORS configuration in the Spring Boot application.
+
+**Solution**:  
+Configure CORS in the main application or create a WebConfig class:
+```java
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/api/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE")
+                .allowedHeaders("*");
+    }
+}
+```
+
 ## Optional Deployment (Experimental)
 
 > **Note**: Backend deployment to Render was explored as an optional enhancement and is not mandatory for core project evaluation.
