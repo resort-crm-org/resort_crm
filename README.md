@@ -192,6 +192,18 @@ mvnw.cmd spring-boot:run
 
 The application will start on `http://localhost:8080`
 
+### 4. Run the Application (Quick Reference)
+```bash
+./mvnw spring-boot:run
+```
+
+On Windows:
+```bash
+mvnw.cmd spring-boot:run
+```
+
+Application runs at: `http://localhost:8080`
+
 ## Configuration
 
 Configuration can be modified in `src/main/resources/application.properties`:
@@ -247,6 +259,27 @@ Access the H2 database console at: `http://localhost:8080/h2-console`
 - `PUT /api/allotments/{id}` - Update allotment
 - `DELETE /api/allotments/{id}` - Delete allotment
 
+
+## Build
+
+```bash
+./mvnw clean package
+```
+
+On Windows:
+```bash
+mvnw.cmd clean package
+```
+
+### Backend Build Success
+
+![Backend Build](Proof/Backend%20Build.png)
+
+### Frontend Build Success
+
+![Frontend Build](Proof/Frontend%20Build.png)
+
+
 ## Docker
 
 Build and run using Docker:
@@ -255,6 +288,14 @@ Build and run using Docker:
 docker build -t resort-crm .
 docker run -p 8080:8080 resort-crm
 ```
+
+### Docker Hub Repository
+
+![Docker Hub](Proof/Docker%20Hub.png)
+
+### Docker Playground Deployment
+
+![Docker Playground](Proof/Docker%20Playground.png)
 
 ## Challenges Faced and Solutions
 
@@ -423,6 +464,18 @@ Production environment variables are configured in Render's dashboard:
 - Monitor application performance and resource usage
 - Set up alerts for downtime or errors
 
+### Backend Deployment
+
+![Backend Deployment](Proof/Backend%20Deployment.png)
+
+### Frontend Deployment
+
+![Frontend Deployed](Proof/Frontend%20deployed.png)
+
+### Custom Domain Configuration
+
+![GitHub Custom Domain](Proof/Github%20Custom%20Domain.png)
+
 ## Known Limitations
 
 - Uses H2 in-memory database; data resets on application restart
@@ -457,6 +510,16 @@ This project integrates SonarCloud for static code analysis and code quality mon
 - **Organization**: 23suca03-dineshkarthick
 - **Project Key**: 23suca03-dineshkarthick_resort_crm
 - **SonarCloud URL**: https://sonarcloud.io
+
+### SonarCloud Analysis Results
+
+#### Backend Analysis
+
+![Sonar Backend](Proof/Sonar%20Backend.png)
+
+#### Frontend Analysis
+
+![Sonar Frontend](Proof/Sonar%20Frontend.png)
 
 ## Development
 
