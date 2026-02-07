@@ -277,7 +277,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 ## Presentation in English
 
-[View Presentation](Proof/Resort%20CRM%20Presentation.pptx)
+[View Presentation](Proof/Resort%20CRM%20Presentation.pdf)
 
 ## Explain Challenges Faced and Solution Implemented
 
