@@ -273,10 +273,7 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 ## Project Demo
 
-<video width="640" height="480" controls>
-  <source src="Proof/demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+[Watch Demo Video on Google Drive](https://drive.google.com/file/d/1NJtjuqoe826sL0LhYJCs43jDAbEGi1h-/view?usp=sharing)
 
 ## Presentation in English
 
