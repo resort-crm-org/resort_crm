@@ -2,9 +2,11 @@
 
 A Spring Boot backend application for managing Resort Customer Relationship Management operations.
 
+> **Note**: This repository contains only the Spring Boot backend service. The frontend and domain configuration are maintained in a separate repository.
+
 ## Project Summary
 
-Resort CRM is a full-stack application designed to manage resort operations efficiently. The system consists of two main components working in tandem:
+Resort CRM is a full-stack application, and this repository implements the Spring Boot backend service. The system consists of two main components working in tandem:
 
 ### Architecture Overview
 
@@ -192,7 +194,7 @@ mvnw.cmd spring-boot:run
 
 The application will start on `http://localhost:8080`
 
-### 4. Run the Application (Quick Reference)
+### 4. Quick Run Reference
 ```bash
 ./mvnw spring-boot:run
 ```
@@ -260,7 +262,7 @@ Access the H2 database console at: `http://localhost:8080/h2-console`
 - `DELETE /api/allotments/{id}` - Delete allotment
 
 
-## Build
+## Backend Build Proof
 
 ```bash
 ./mvnw clean package
@@ -275,10 +277,6 @@ mvnw.cmd clean package
 
 ![Backend Build](Proof/Backend%20Build.png)
 
-### Frontend Build Success
-
-![Frontend Build](Proof/Frontend%20Build.png)
-
 
 ## Docker
 
@@ -288,6 +286,8 @@ Build and run using Docker:
 docker build -t resort-crm .
 docker run -p 8080:8080 resort-crm
 ```
+
+> Refer to the Dockerfile section in Challenges below for multi-stage build configuration.
 
 ### Docker Hub Repository
 
@@ -468,14 +468,6 @@ Production environment variables are configured in Render's dashboard:
 
 ![Backend Deployment](Proof/Backend%20Deployment.png)
 
-### Frontend Deployment
-
-![Frontend Deployed](Proof/Frontend%20deployed.png)
-
-### Custom Domain Configuration
-
-![GitHub Custom Domain](Proof/Github%20Custom%20Domain.png)
-
 ## Known Limitations
 
 - Uses H2 in-memory database; data resets on application restart
@@ -517,10 +509,6 @@ This project integrates SonarCloud for static code analysis and code quality mon
 
 ![Sonar Backend](Proof/Sonar%20Backend.png)
 
-#### Frontend Analysis
-
-![Sonar Frontend](Proof/Sonar%20Frontend.png)
-
 ## Development
 
 ### Hot Reload
@@ -539,4 +527,4 @@ For issues or questions, please refer to the project repository or contact the d
 
 ---
 
-**Last Updated**: January 31, 2026
+**Last Updated**: February 7, 2026
