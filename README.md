@@ -4,9 +4,9 @@ A Spring Boot backend application for managing Resort Customer Relationship Mana
 
 > **Note**: This repository contains only the Spring Boot backend service. The frontend and domain configuration are maintained in a separate repository.
 
-## Project Summary
+## Development Frontend
 
-Resort CRM is a full-stack application, and this repository implements the Spring Boot backend service. The system consists of two main components working in tandem:
+Resort CRM is a full-stack application. This repository implements the backend service only. The frontend is maintained separately.
 
 ### Architecture Overview
 
@@ -102,7 +102,12 @@ Frontend Response:
 - State management
 - Data display and visualization
 
-**Backend Responsibilities**:
+## Development Backend
+
+This project provides a RESTful API for managing guest information, room management, and room allotments in a resort. The application is built with Spring Boot 3.3.4 and uses H2 in-memory database for data persistence.
+
+### Backend Responsibilities
+
 - Business logic implementation
 - Data validation and processing
 - Database management
@@ -110,11 +115,7 @@ Frontend Response:
 - Error handling and logging
 - API request routing
 
-## Overview
-
-This project provides a RESTful API for managing guest information, room management, and room allotments in a resort. The application is built with Spring Boot 3.3.4 and uses H2 in-memory database for data persistence.
-
-## Technology Stack
+### Technology Stack
 
 - **Java**: 17
 - **Spring Boot**: 3.3.4
@@ -123,7 +124,7 @@ This project provides a RESTful API for managing guest information, room managem
 - **Maven**: Build and dependency management
 - **Docker**: Containerization support
 
-## Project Structure
+### Project Structure
 
 ```
 src/main/java/com/resort/crm/
@@ -149,7 +150,7 @@ src/main/java/com/resort/crm/
     └── RestExceptionHandler.java      # Global exception handler
 ```
 
-## Features
+### Features
 
 - **Guest Management**: Create, read, update, and delete guest records
 - **Room Management**: Manage room information and availability
@@ -158,21 +159,21 @@ src/main/java/com/resort/crm/
 - **RESTful API**: Clean and intuitive API endpoints
 - **H2 Console**: Web-based console for database inspection
 
-## Prerequisites
+### Prerequisites
 
 - Java 17 or higher
 - Maven 3.6 or higher
 - Git (optional, for cloning the repository)
 
-## Installation & Setup
+### Installation & Setup
 
-### 1. Clone the Repository
+#### 1. Clone the Repository
 ```bash
 git clone <repository-url>
 cd resort_crm
 ```
 
-### 2. Build the Project
+#### 2. Build the Project
 ```bash
 ./mvnw clean package
 ```
@@ -182,7 +183,7 @@ On Windows:
 mvnw.cmd clean package
 ```
 
-### 3. Run the Application
+#### 3. Run the Application
 ```bash
 ./mvnw spring-boot:run
 ```
@@ -194,7 +195,7 @@ mvnw.cmd spring-boot:run
 
 The application will start on `http://localhost:8080`
 
-### 4. Quick Run Reference
+#### 4. Quick Run Reference
 ```bash
 ./mvnw spring-boot:run
 ```
@@ -206,7 +207,7 @@ mvnw.cmd spring-boot:run
 
 Application runs at: `http://localhost:8080`
 
-## Configuration
+### Configuration
 
 Configuration can be modified in `src/main/resources/application.properties`:
 
@@ -228,9 +229,9 @@ spring.h2.console.enabled=true            # Enable H2 console
 spring.h2.console.path=/h2-console        # H2 console path
 ```
 
-## Database
+### Database
 
-### H2 Database Console
+#### H2 Database Console
 Access the H2 database console at: `http://localhost:8080/h2-console`
 
 **JDBC URL**: `jdbc:h2:mem:resortcrm;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE`
@@ -239,30 +240,122 @@ Access the H2 database console at: `http://localhost:8080/h2-console`
 
 **Password**: (leave empty)
 
-## API Endpoints
+### API Endpoints
 
-### Guest Management
+#### Guest Management
 - `GET /api/guests` - Get all guests
 - `GET /api/guests/{id}` - Get guest by ID
 - `POST /api/guests` - Create new guest
 - `PUT /api/guests/{id}` - Update guest
 - `DELETE /api/guests/{id}` - Delete guest
 
-### Room Management
+#### Room Management
 - `GET /api/rooms` - Get all rooms
 - `GET /api/rooms/{id}` - Get room by ID
 - `POST /api/rooms` - Create new room
 - `PUT /api/rooms/{id}` - Update room
 - `DELETE /api/rooms/{id}` - Delete room
 
-### Room Allotment
+#### Room Allotment
 - `POST /api/allotments` - Allocate room to guest
 - `GET /api/allotments` - Get all allotments
 - `PUT /api/allotments/{id}` - Update allotment
 - `DELETE /api/allotments/{id}` - Delete allotment
 
+### Development
 
-## Backend Build Proof
+#### Hot Reload
+The project includes Spring Boot DevTools for automatic restart during development. Changes to Java files will trigger automatic recompilation.
+
+#### IDE Setup
+Import the project as a Maven project in your IDE (IntelliJ IDEA, Eclipse, VS Code with Java extensions, etc.).
+
+### Testing
+
+Run tests with:
+
+```bash
+./mvnw test
+```
+
+On Windows:
+```bash
+mvnw.cmd test
+```
+
+### Error Handling
+
+The application includes centralized exception handling for:
+- **BadRequestException**: Invalid request parameters
+- **ResourceNotFoundException**: Requested resource not found
+- **General HTTP Exceptions**: Mapped through `RestExceptionHandler`
+
+### Known Limitations
+
+- Uses H2 in-memory database; data resets on application restart
+- No authentication or authorization implemented
+- Designed for single-resort usage
+- Not optimized for large-scale concurrent traffic
+- Room allotment system uses basic assignment logic
+
+### Optional Deployment (Experimental)
+
+> **Note**: Backend deployment to Render was explored as an optional enhancement and is not mandatory for core project evaluation.
+
+#### Production Deployment on Render
+
+The Resort CRM backend is deployed and hosted on **Render.com**, a modern cloud platform for building and running applications.
+
+**Deployment URL**: [https://resortcrm-by-dk.onrender.com](https://resortcrm-by-dk.onrender.com) (Production Endpoint)
+
+##### Accessing the Production Backend
+
+- **Base URL**: `https://resortcrm-by-dk.onrender.com`
+- **Database**: Uses Render's managed database service or cloud-based alternatives
+- **Auto-Deploy**: The application auto-deploys on commits to the main branch
+- **Environment**: Production-grade environment with automatic scaling
+
+##### Render Configuration
+
+- **Service Type**: Web Service
+- **Runtime**: Java 17
+- **Build Command**: `./mvnw clean package`
+- **Start Command**: `java -jar target/resort_crm-0.0.1-SNAPSHOT.jar`
+- **Region**: Auto-selected for optimal performance
+
+##### Frontend Integration with Production Backend
+
+Update your frontend application's API base URL to point to the deployed backend:
+
+```javascript
+// Frontend Configuration
+const API_BASE_URL = 'https://resortcrm-by-dk.onrender.com';
+
+// Example API call
+fetch(`${API_BASE_URL}/api/guests`)
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error('Error:', error));
+```
+
+##### Environment Variables
+
+Production environment variables are configured in Render's dashboard:
+- `server.port`: Automatically managed by Render
+- `spring.datasource.url`: Production database URL
+- `spring.jpa.hibernate.ddl-auto`: Set to `validate` or `update` for production
+
+##### Monitoring & Logs
+
+- Access logs through Render's dashboard
+- Monitor application performance and resource usage
+- Set up alerts for downtime or errors
+
+#### Backend Deployment
+
+![Backend Deployment](Proof/Backend%20Deployment.png)
+
+## Build Project
 
 ```bash
 ./mvnw clean package
@@ -277,8 +370,24 @@ mvnw.cmd clean package
 
 ![Backend Build](Proof/Backend%20Build.png)
 
+## Sonar Analysis
 
-## Docker
+This project integrates SonarCloud for static code analysis and code quality monitoring:
+- **Organization**: 23suca03-dineshkarthick
+- **Project Key**: 23suca03-dineshkarthick_resort_crm
+- **SonarCloud URL**: https://sonarcloud.io
+
+### SonarCloud Analysis Results
+
+#### Backend Analysis
+
+![Sonar Backend](Proof/Sonar%20Backend.png)
+
+## Proper Pull Request
+
+![Proper PullRequest](Proof/PR.png)
+
+## Docker Image Build
 
 Build and run using Docker:
 
@@ -297,7 +406,30 @@ docker run -p 8080:8080 resort-crm
 
 ![Docker Playground](Proof/Docker%20Playground.png)
 
-## Challenges Faced and Solutions
+## Vercel Deployment
+
+Not applicable for the backend repository.
+
+## Vercel Deployment with Domain Name
+
+Not applicable for the backend repository.
+
+## Project Demo
+
+<video width="640" height="480" controls>
+  <source src="Proof/demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+## Presentation in English
+
+[View Presentation](Proof/Resort%20CRM%20Presentation.pptx)
+
+## GitHub Student Pack Demo
+
+Not available in this backend repository.
+
+## Explaining Challenges Faced
 
 During the development and DevOps integration of the Resort CRM backend, several challenges were encountered. These issues were resolved through systematic debugging and configuration adjustments.
 
@@ -410,112 +542,6 @@ public class WebConfig implements WebMvcConfigurer {
     }
 }
 ```
-
-## Optional Deployment (Experimental)
-
-> **Note**: Backend deployment to Render was explored as an optional enhancement and is not mandatory for core project evaluation.
-
-### Production Deployment on Render
-
-The Resort CRM backend is deployed and hosted on **Render.com**, a modern cloud platform for building and running applications.
-
-**Deployment URL**: [https://resortcrm-by-dk.onrender.com](https://resortcrm-by-dk.onrender.com) (Production Endpoint)
-
-#### Accessing the Production Backend
-
-- **Base URL**: `https://resortcrm-by-dk.onrender.com`
-- **Database**: Uses Render's managed database service or cloud-based alternatives
-- **Auto-Deploy**: The application auto-deploys on commits to the main branch
-- **Environment**: Production-grade environment with automatic scaling
-
-#### Render Configuration
-
-- **Service Type**: Web Service
-- **Runtime**: Java 17
-- **Build Command**: `./mvnw clean package`
-- **Start Command**: `java -jar target/resort_crm-0.0.1-SNAPSHOT.jar`
-- **Region**: Auto-selected for optimal performance
-
-#### Frontend Integration with Production Backend
-
-Update your frontend application's API base URL to point to the deployed backend:
-
-```javascript
-// Frontend Configuration
-const API_BASE_URL = 'https://resortcrm-by-dk.onrender.com';
-
-// Example API call
-fetch(`${API_BASE_URL}/api/guests`)
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Error:', error));
-```
-
-#### Environment Variables
-
-Production environment variables are configured in Render's dashboard:
-- `server.port`: Automatically managed by Render
-- `spring.datasource.url`: Production database URL
-- `spring.jpa.hibernate.ddl-auto`: Set to `validate` or `update` for production
-
-#### Monitoring & Logs
-
-- Access logs through Render's dashboard
-- Monitor application performance and resource usage
-- Set up alerts for downtime or errors
-
-### Backend Deployment
-
-![Backend Deployment](Proof/Backend%20Deployment.png)
-
-## Known Limitations
-
-- Uses H2 in-memory database; data resets on application restart
-- No authentication or authorization implemented
-- Designed for single-resort usage
-- Not optimized for large-scale concurrent traffic
-- Room allotment system uses basic assignment logic
-
-## Testing
-
-Run tests with:
-
-```bash
-./mvnw test
-```
-
-On Windows:
-```bash
-mvnw.cmd test
-```
-
-## Error Handling
-
-The application includes centralized exception handling for:
-- **BadRequestException**: Invalid request parameters
-- **ResourceNotFoundException**: Requested resource not found
-- **General HTTP Exceptions**: Mapped through `RestExceptionHandler`
-
-## Code Quality
-
-This project integrates SonarCloud for static code analysis and code quality monitoring:
-- **Organization**: 23suca03-dineshkarthick
-- **Project Key**: 23suca03-dineshkarthick_resort_crm
-- **SonarCloud URL**: https://sonarcloud.io
-
-### SonarCloud Analysis Results
-
-#### Backend Analysis
-
-![Sonar Backend](Proof/Sonar%20Backend.png)
-
-## Development
-
-### Hot Reload
-The project includes Spring Boot DevTools for automatic restart during development. Changes to Java files will trigger automatic recompilation.
-
-### IDE Setup
-Import the project as a Maven project in your IDE (IntelliJ IDEA, Eclipse, VS Code with Java extensions, etc.).
 
 ## License
 
