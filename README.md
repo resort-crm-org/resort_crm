@@ -279,9 +279,15 @@ ENTRYPOINT ["java", "-jar", "app.jar"]
 
 [View Presentation](Proof/Resort%20CRM%20Presentation.pdf)
 
+## GitHub Student Pack Demo
+
+![Github Student Pack Demo](Proof/Github%20Student%20Pack%20Demo.png)
+
 ## Explain Challenges Faced and Solution Implemented
 
 During the development and DevOps integration of the Resort CRM backend, several challenges were encountered. These issues were resolved through systematic debugging and configuration adjustments.
+
+![Issues Faced](Proof/Issues%20Faced.png)
 
 ### 1. Maven Command Not Found
 
@@ -460,4 +466,4 @@ For issues or questions, please refer to the project repository or contact the d
 
 ---
 
-**Last Updated**: February 7, 2026
+**Last Updated**: February 8, 2026
