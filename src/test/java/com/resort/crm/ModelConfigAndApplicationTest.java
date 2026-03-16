@@ -75,7 +75,8 @@ class ModelConfigAndApplicationTest {
 
     @Test
     void corsConfigRegistersMappingsWithoutError() {
-        assertThatCode(() -> new CorsConfig().addCorsMappings(new CorsRegistry()))
+        assertThatCode(() -> new CorsConfig(List.of("http://localhost:3000", "http://localhost:5173"))
+            .addCorsMappings(new CorsRegistry()))
                 .doesNotThrowAnyException();
     }
 

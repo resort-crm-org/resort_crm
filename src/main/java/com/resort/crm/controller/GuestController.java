@@ -3,7 +3,6 @@ package com.resort.crm.controller;
 import com.resort.crm.model.Guest;
 import com.resort.crm.service.GuestService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/api/guests")
-@CrossOrigin(origins = "*")
 public class GuestController {
 
     private final GuestService guestService;
