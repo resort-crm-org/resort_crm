@@ -1,4 +1,4 @@
-name: Build
+name: SonarQube Analysis
 on:
   push:
     branches:
@@ -7,7 +7,7 @@ on:
     types: [opened, synchronize, reopened]
 jobs:
   sonarqube:
-    name: Build and SonarQube Analyze
+    name: SonarQube Analysis
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
