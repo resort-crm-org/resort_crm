@@ -22,9 +22,11 @@ jobs:
           cache: maven
       
       - name: Build & Test
-        run: ./mvnw -B clean verify
+        shell: cmd
+        run: .\mvnw.cmd -B clean verify
       
       - name: SonarCloud Scan
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: ./mvnw -B sonar:sonar -Dsonar.java.binaries=target/classes -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
+        shell: cmd
+        run: .\mvnw.cmd -B sonar:sonar -Dsonar.java.binaries=target/classes -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml
